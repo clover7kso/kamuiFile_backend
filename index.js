@@ -8,10 +8,10 @@ const __dirname = path.resolve();
 const CORS_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
-    : "https//woony.ml/kamuifile_backend";
+    : "https//woony.ml";
 
 const PATH_URL =
-  process.env.NODE_ENV === "development" ? "/" : "/kamuifile_backend/socket.io";
+  process.env.NODE_ENV === "development" ? "/" : "/backend/socket.io";
 
 let app = express();
 let server = http.createServer(app);
