@@ -10,9 +10,13 @@ const CORS_URL =
     ? "http://localhost:3000"
     : "https//woony.ml/kamuifile_backend";
 
+const PATH_URL =
+  process.env.NODE_ENV === "development" ? "/" : "/kamuifile_backend/socket.io";
+
 let app = express();
 let server = http.createServer(app);
 let io = new Server(server, {
+  path: PATH_URL,
   cors: {
     origin: [CORS_URL],
     methods: ["GET", "POST"],
