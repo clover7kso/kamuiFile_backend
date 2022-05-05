@@ -5,11 +5,16 @@ import { Server } from "socket.io";
 import path from "path";
 const __dirname = path.resolve();
 
+const CORS_URL =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:3000"
+    : "https//woony.ml/kamuifile_backend";
+
 let app = express();
 let server = http.createServer(app);
 let io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3000"],
+    origin: [CORS_URL],
     methods: ["GET", "POST"],
   },
 });
