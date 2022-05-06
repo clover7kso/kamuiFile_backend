@@ -5,12 +5,16 @@ import { Server } from "socket.io";
 import path from "path";
 const __dirname = path.resolve();
 
+process.env.NODE_ENV = "development";
 const CORS_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
     : "https//woony.ml";
 
 const PATH_URL = process.env.NODE_ENV === "development" ? "/" : "/backend";
+
+console.log(CORS_URL);
+console.log(PATH_URL);
 
 let app = express();
 let server = http.createServer(app);
@@ -65,14 +69,18 @@ io.on("connection", (socket) => {
       }
       users[roomID].push(socket.id);
     }
-    socketToRoom[socket.id] = roomID;
-    //console.log(users[roomID]);
+    try {
+      socketToRoom[socket.id] = roomID;
+      //console.log(users[roomID]);
 
-    const usersInThisRoom = users[roomID].filter((id) => id !== socket.id);
-    //console.log("usersInThisRoom");
-    //console.log(usersInThisRoom);
+      const usersInThisRoom = users[roomID].filter((id) => id !== socket.id);
+      //console.log("usersInThisRoom");
+      //console.log(usersInThisRoom);
 
-    socket.emit("all users", usersInThisRoom);
+      socket.emit("all users", usersInThisRoom);
+    } catch (e) {
+      return;
+    }
   });
 
   socket.on("sending signal", (payload) => {
