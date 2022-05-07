@@ -5,16 +5,13 @@ import { Server } from "socket.io";
 import path from "path";
 const __dirname = path.resolve();
 
-process.env.NODE_ENV = "development";
+process.env.NODE_ENV = "deploy";
 const CORS_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
     : "https//woony.ml";
 
 const PATH_URL = process.env.NODE_ENV === "development" ? "/" : "/backend";
-
-console.log(CORS_URL);
-console.log(PATH_URL);
 
 let app = express();
 let server = http.createServer(app);
@@ -79,6 +76,8 @@ io.on("connection", (socket) => {
 
       socket.emit("all users", usersInThisRoom);
     } catch (e) {
+      socket.emit("cant find room");
+      console.log(e);
       return;
     }
   });
