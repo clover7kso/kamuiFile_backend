@@ -5,11 +5,11 @@ import { Server } from "socket.io";
 import path from "path";
 const __dirname = path.resolve();
 
-process.env.NODE_ENV = "deploy";
+process.env.NODE_ENV = "development";
 const CORS_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
-    : "https//woony.ml";
+    : "https//kamuifile.com";
 
 const PATH_URL = process.env.NODE_ENV === "development" ? "/" : "/backend";
 
