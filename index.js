@@ -50,7 +50,7 @@ io.on("connection", (socket) => {
     users[roomID] = [socket.id];
     socketToRoom[socket.id] = roomID;
     //console.log(users[roomID]);
-    socket.timeout(30000).emit("create room done", roomID, (err, response) => {
+    socket.timeout(120000).emit("create room done", roomID, (err, response) => {
       if (err) socket.disconnect();
     });
   });
